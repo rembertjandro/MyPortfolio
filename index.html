@@ -147,8 +147,31 @@
   .reveal{opacity:0; transform:translateY(16px); transition:opacity .8s ease, transform .8s ease;}
   .reveal.in{opacity:1; transform:translateY(0);}
 
-  .skills{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem; margin-top:1rem; padding:0; list-style:none;}
-  .skills li{border:1px solid rgba(244,242,237,.26); border-radius:999px; padding:.55rem .8rem; font-size:.8rem; text-align:center;}
+  .skills{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.55rem; margin-top:1rem; padding:0; list-style:none;}
+  .skill-button{
+    min-height:2.8rem; padding:.55rem .7rem; color:var(--ink);
+    background:linear-gradient(110deg,transparent 34%,rgba(255,255,255,.2) 48%,transparent 62%),linear-gradient(135deg,rgba(255,255,255,.1),rgba(244,242,237,.025) 52%,rgba(255,255,255,.045));
+    background-size:220% 100%,100% 100%; background-position:110% 0,0 0;
+    border:1px solid rgba(244,242,237,.28); border-radius:7px; cursor:pointer;
+    backdrop-filter:blur(12px) saturate(145%);
+    box-shadow:inset 0 1px rgba(255,255,255,.16),0 5px 16px rgba(0,0,0,.12);
+    font:inherit; font-size:.8rem; text-align:left;
+    transition:background-position .65s cubic-bezier(.2,.8,.2,1),border-color .25s ease,box-shadow .3s ease,transform .25s ease;
+  }
+  .skill-button:hover,.skill-button:focus-visible{background-position:-10% 0,0 0; border-color:rgba(255,255,255,.7); box-shadow:inset 0 1px rgba(255,255,255,.32),0 8px 24px rgba(0,0,0,.22),0 0 18px rgba(220,238,255,.12); transform:translateY(-1px);}
+  .skill-button[aria-pressed="true"]{background-position:-10% 0,0 0; border-color:rgba(255,255,255,.82); box-shadow:inset 0 1px rgba(255,255,255,.35),0 0 0 1px rgba(255,255,255,.08),0 0 22px rgba(220,238,255,.2);}
+  .skill-explorer{position:relative;}
+  .skill-preview{display:none; position:absolute; z-index:2; top:calc(100% + .75rem); left:0; right:0; min-height:3.2em; margin:0; padding:.75rem .85rem; color:var(--ink-dim); background:rgba(13,17,25,.88); border:1px solid rgba(244,242,237,.2); border-radius:7px; box-shadow:0 12px 28px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.12); backdrop-filter:blur(16px) saturate(145%); font-size:.86rem; line-height:1.55;}
+  .skill-preview.is-visible{display:block;}
+  .skill-details{display:grid; grid-template-rows:0fr; opacity:0; visibility:hidden; pointer-events:none; margin-top:0; padding-top:0; border-top:0 solid transparent; overflow:hidden; transition:grid-template-rows .68s cubic-bezier(.22,1,.36,1),opacity .4s ease,margin-top .68s cubic-bezier(.22,1,.36,1),padding-top .68s cubic-bezier(.22,1,.36,1),border-top-width .68s cubic-bezier(.22,1,.36,1),border-color .4s ease,visibility 0s linear .68s;}
+  .skill-details.is-open{grid-template-rows:1fr; opacity:1; visibility:visible; pointer-events:auto; margin-top:1rem; padding-top:1rem; border-top-width:1px; border-color:rgba(244,242,237,.16); transition:grid-template-rows .68s cubic-bezier(.22,1,.36,1),opacity .4s ease,margin-top .68s cubic-bezier(.22,1,.36,1),padding-top .68s cubic-bezier(.22,1,.36,1),border-top-width .68s cubic-bezier(.22,1,.36,1),border-color .4s ease,visibility 0s;}
+  .skill-details-inner{min-height:0; overflow:hidden;}
+  .skill-details h3{font-size:1.05rem; margin-bottom:.45rem;}
+  .skill-details p,.skill-details li{font-size:.86rem; line-height:1.55; color:var(--ink-dim);}
+  .skill-details ul{display:grid; gap:.55rem; margin:.75rem 0 0; padding-left:1.1rem;}
+  .about-section{height:auto; min-height:100vh; min-height:100dvh; align-items:center; padding-top:8rem; padding-bottom:4rem;}
+  .about-section .two-col-layout{align-items:start;}
+  .about-section .left-copy{position:sticky; top:50dvh; align-self:start; transform:translateY(-50%);}
 
   .two-col-layout{
     width:min(100%, 1200px);
@@ -273,7 +296,7 @@
   a:focus-visible, button:focus-visible{outline:2px solid var(--ink); outline-offset:3px;}
 
   @media (prefers-reduced-motion:reduce){
-    .bg-layer, .blob, .reveal, .page-indicator, .scroll-shade{transition:none !important;}
+    .bg-layer, .blob, .reveal, .page-indicator, .scroll-shade, .skill-button, .skill-details{transition:none !important;}
   }
   @media (max-width:700px){
     html{scroll-snap-type:y proximity;}
@@ -281,6 +304,8 @@
     .brand-name{font-size:.7rem;}
     .page-link{font-size:.74rem;}
     section:not(.hero){height:auto; min-height:100dvh; padding:10rem 1.5rem 3rem;}
+    .about-section{align-items:flex-start;}
+    .about-section .left-copy{position:static; top:auto; transform:none;}
     .two-col-layout{grid-template-columns:minmax(0,1fr); gap:1.5rem;}
     .contact-layout{
       grid-template-areas:"intro" "availability" "contacts" "download";
@@ -334,7 +359,7 @@
   </div>
 </section>
 
-<section data-bg="2">
+<section data-bg="2" class="about-section">
   <div class="content two-col-layout">
     <div class="left-copy">
       <p class="eyebrow reveal">About</p>
@@ -342,17 +367,23 @@
       <p class="reveal">I'm eager to bring technical problem-solving and systematic testing skills to a progressive technology organization — with hands-on experience across manual, automation, and API testing, and a growing foundation in software development.</p>
     </div>
     <aside class="support-panel reveal">
-      <span class="panel-label">Core skills</span>
-      <ul class="skills">
-        <li>Manual Testing</li>
-        <li>Automation Testing</li>
-        <li>API Testing</li>
-        <li>JavaScript</li>
-        <li>Python</li>
-        <li>C++</li>
-        <li>TypeScript</li>
-        <li>Problem Solving</li>
-      </ul>
+      <span class="panel-label">Core Skills:</span>
+      <div class="skill-explorer">
+        <ul class="skills">
+          <li><button class="skill-button" type="button" data-skill="manual" aria-pressed="false" aria-expanded="false" aria-controls="skill-details">Manual Testing</button></li>
+          <li><button class="skill-button" type="button" data-skill="automation" aria-pressed="false" aria-expanded="false" aria-controls="skill-details">Automation Testing</button></li>
+          <li><button class="skill-button" type="button" data-skill="api" aria-pressed="false" aria-expanded="false" aria-controls="skill-details">API Testing</button></li>
+          <li><button class="skill-button" type="button" data-skill="javascript" aria-pressed="false" aria-expanded="false" aria-controls="skill-details">JavaScript</button></li>
+          <li><button class="skill-button" type="button" data-skill="python" aria-pressed="false" aria-expanded="false" aria-controls="skill-details">Python</button></li>
+          <li><button class="skill-button" type="button" data-skill="cpp" aria-pressed="false" aria-expanded="false" aria-controls="skill-details">C++</button></li>
+          <li><button class="skill-button" type="button" data-skill="typescript" aria-pressed="false" aria-expanded="false" aria-controls="skill-details">TypeScript</button></li>
+          <li><button class="skill-button" type="button" data-skill="problem-solving" aria-pressed="false" aria-expanded="false" aria-controls="skill-details">Problem Solving</button></li>
+        </ul>
+        <p class="skill-preview" id="skill-preview" aria-live="polite" aria-hidden="true"></p>
+      </div>
+      <div class="skill-details" id="skill-details" aria-live="polite" aria-hidden="true">
+        <div class="skill-details-inner"></div>
+      </div>
     </aside>
   </div>
 </section>
@@ -482,11 +513,166 @@
   }, {threshold:0.6});
   sections.forEach(s=>bgObserver.observe(s));
 
+  let panelScrollLocked = false;
+  let panelScrollUnlockTimer;
+  const releasePanelScrollLock = ()=>{
+    clearTimeout(panelScrollUnlockTimer);
+    panelScrollUnlockTimer = setTimeout(()=>panelScrollLocked = false, 180);
+  };
+  document.scrollingElement.addEventListener('scrollend', releasePanelScrollLock);
+  const navigateToPanel = index=>{
+    const target = sections[index];
+    if(!target) return;
+    panelScrollLocked = true;
+    target.scrollIntoView({behavior:'smooth', block:'start'});
+    clearTimeout(panelScrollUnlockTimer);
+    panelScrollUnlockTimer = setTimeout(()=>panelScrollLocked = false, 1100);
+  };
+
   pageLinks.forEach(link=>{
-    link.addEventListener('click', ()=>{
-      const target = document.querySelector(`section[data-bg="${link.dataset.goto}"]`);
-      target.scrollIntoView({behavior:'smooth'});
+    link.addEventListener('click', ()=>navigateToPanel(Number(link.dataset.goto) - 1));
+  });
+
+  window.addEventListener('wheel', event=>{
+    if(Math.abs(event.deltaY) < 12 || Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
+    event.preventDefault();
+    if(panelScrollLocked) return;
+
+    const currentIndex = [...sections].reduce((closestIndex, section, index)=>{
+      const closestTop = Math.abs(sections[closestIndex].getBoundingClientRect().top);
+      const sectionTop = Math.abs(section.getBoundingClientRect().top);
+      return sectionTop < closestTop ? index : closestIndex;
+    }, 0);
+    const direction = Math.sign(event.deltaY);
+    navigateToPanel(Math.max(0, Math.min(sections.length - 1, currentIndex + direction)));
+  }, {passive:false});
+
+  const skillContent = {
+    manual: {
+      title:'Manual Testing',
+      preview:'I test user flows, explore edge cases, and document clear defects.',
+      description:'I test web features against requirements and explore real user flows.',
+      points:[
+        'I test web apps against user stories, checking layouts, edge cases, and user flows.',
+        'I log reproducible bugs with steps and ScreenPal screenshots or recordings.',
+        'I explore beyond scripted cases to uncover hidden issues.',
+        'I use Git branches to test specific and current builds.'
+      ]
+    },
+    api: {
+      title:'API Testing',
+      preview:'I check API responses, database changes, and service communication.',
+      description:'I validate backend behavior and data before testing the UI.',
+      points:[
+        'I use Postman to send GET, POST, PUT, and DELETE requests and check status, data, and headers.',
+        'I query PostgreSQL to confirm API actions create, update, or delete records.',
+        'I use Podman to run isolated app containers or mock databases.',
+        'I write Postman JavaScript checks for schemas, response times, and payloads.'
+      ]
+    },
+    automation: {
+      title:'Automation Testing',
+      preview:'I automate browser workflows and regression checks with Playwright.',
+      description:'I build reusable tests to catch regressions in key workflows.',
+      points:[
+        'I write Playwright and TypeScript end-to-end tests for browser actions and UI checks.',
+        'I run test suites in Podman for consistent environments.',
+        'I manage test code in Git, including branches, merges, and reviews.',
+        'I use PostgreSQL to seed or clean up test data.'
+      ]
+    },
+    javascript: {
+      title:'JavaScript',
+      preview:'I use JavaScript to build interactive front-end features.',
+      description:'I use JavaScript to understand app structure and build interactive features.',
+      points:['I apply it to style and build interactive elements on the front end.']
+    },
+    python: {
+      title:'Python',
+      preview:'I used Python for IoT sensor and device logic in my capstone.',
+      description:'I used Python for embedded systems in my IoT capstone.',
+      points:['I ran sensor and device-control scripts on a Raspberry Pi 4B.']
+    },
+    cpp: {
+      title:'C++',
+      preview:'I used C++ to build firmware and control Arduino hardware.',
+      description:'I used C++ for hardware integration and microcontroller firmware.',
+      points:['I wrote firmware and control logic for Arduino microcontrollers.']
+    },
+    typescript: {
+      title:'TypeScript',
+      preview:'I use TypeScript with Playwright for reliable end-to-end tests.',
+      description:'I use TypeScript to write reliable Playwright tests.',
+      points:['I write type-safe browser automation and end-to-end checks.']
+    },
+    'problem-solving': {
+      title:'Problem Solving',
+      preview:'I break complex software, hardware, and technical issues into steps.',
+      description:'I break down complex technical issues into manageable steps.',
+      points:['I analyze software bugs, hardware issues, and bottlenecks to find practical solutions.']
+    }
+  };
+  const skillButtons = [...document.querySelectorAll('.skill-button')];
+  const skillExplorer = document.querySelector('.skill-explorer');
+  const skillPreview = document.querySelector('#skill-preview');
+  const skillDetails = document.querySelector('#skill-details');
+  const skillDetailsContent = skillDetails.querySelector('.skill-details-inner');
+  let selectedSkill = null;
+
+  const previewSkill = skill=>{
+    skillPreview.textContent = skillContent[skill].preview;
+    skillPreview.classList.add('is-visible');
+    skillPreview.setAttribute('aria-hidden', 'false');
+  };
+  const clearSkillPreview = ()=>{
+    skillPreview.textContent = '';
+    skillPreview.classList.remove('is-visible');
+    skillPreview.setAttribute('aria-hidden', 'true');
+  };
+  const showSkillDetails = skill=>{
+    const content = skillContent[skill];
+    skillDetailsContent.replaceChildren();
+    const heading = document.createElement('h3');
+    heading.textContent = content.title;
+    const description = document.createElement('p');
+    description.textContent = content.description;
+    const points = document.createElement('ul');
+    content.points.forEach(point=>{
+      const item = document.createElement('li');
+      item.textContent = point;
+      points.append(item);
     });
+    skillDetailsContent.append(heading, description, points);
+    skillDetails.setAttribute('aria-hidden', 'false');
+    skillDetails.classList.add('is-open');
+  };
+
+  skillButtons.forEach(button=>{
+    button.addEventListener('pointerenter', ()=>previewSkill(button.dataset.skill));
+    button.addEventListener('focus', ()=>previewSkill(button.dataset.skill));
+    button.addEventListener('click', ()=>{
+      const isSelected = selectedSkill === button.dataset.skill;
+      selectedSkill = isSelected ? null : button.dataset.skill;
+      skillButtons.forEach(skillButton=>{
+        const active = skillButton.dataset.skill === selectedSkill;
+        skillButton.setAttribute('aria-pressed', String(active));
+        skillButton.setAttribute('aria-expanded', String(active));
+      });
+      if(selectedSkill){
+        clearSkillPreview();
+        showSkillDetails(selectedSkill);
+      }else{
+        skillDetails.classList.remove('is-open');
+        skillDetails.setAttribute('aria-hidden', 'true');
+        clearSkillPreview();
+      }
+    });
+    button.addEventListener('blur', event=>{
+      if(!event.relatedTarget?.closest('.skill-button')) clearSkillPreview();
+    });
+  });
+  skillExplorer.addEventListener('pointerleave', event=>{
+    if(!document.activeElement.matches('.skill-button:focus-visible')) clearSkillPreview();
   });
 
   const viberToggle = document.querySelector('.viber-toggle');
