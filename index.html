@@ -6,7 +6,7 @@
 <title>Rembert Jandro Alipopo — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     box-sizing:border-box;
@@ -72,7 +72,7 @@
   }
   .scroll-shade.active{opacity:1;}
 
-  h1,h2,h3{font-family:'Space Grotesk',sans-serif; font-weight:500; margin:0; letter-spacing:-0.01em;}
+  h1,h2,h3{font-family:'Archivo',sans-serif; font-weight:700; font-stretch:112%; margin:0; letter-spacing:0;}
   p{margin:0; line-height:1.6; color:var(--ink-dim);}
   a{color:inherit;}
 
@@ -226,10 +226,11 @@
     font-size:.85rem; color:var(--ink-dim); pointer-events:none;
   }
   nav span{pointer-events:auto;}
+  .brand-name{font-family:'Space Grotesk',sans-serif; font-size:.75rem; font-weight:500; color:var(--ink);}
 
   .dots{
     position:fixed; top:1rem; right:clamp(1.5rem,6vw,6rem); z-index:3;
-    display:flex; align-items:center; gap:.25rem; padding:.4rem .5rem;
+    display:flex; align-items:center; gap:1.25rem; padding:.4rem .5rem;
   }
   .page-indicator{
     position:absolute; top:0; left:0; z-index:0; opacity:0;
@@ -258,6 +259,7 @@
   @media (max-width:700px){
     html{scroll-snap-type:y proximity;}
     .dots{top:4.15rem; right:1.5rem; left:1.5rem; justify-content:space-between; gap:.1rem;}
+    .brand-name{font-size:.7rem;}
     .page-link{font-size:.74rem;}
     section:not(.hero){height:auto; min-height:100dvh; padding:10rem 1.5rem 3rem;}
     .two-col-layout{grid-template-columns:minmax(0,1fr); gap:1.5rem;}
@@ -280,7 +282,7 @@
 <div class="blob"></div>
 <div class="scroll-shade" aria-hidden="true"></div>
 
-<nav><span>Rembert Jandro Alipopo</span></nav>
+<nav><span class="brand-name">Rembert Jandro A. Alipopo</span></nav>
 <div class="dots" role="navigation" aria-label="Page navigation">
   <span class="page-indicator" aria-hidden="true"></span>
   <button class="page-link active" data-goto="1" aria-label="Go to intro">Intro</button>
@@ -301,8 +303,8 @@
       <strong>QA + software engineering opportunities</strong>
       <div class="hero-card-tags">
         <span>Manual Testing</span>
-        <span>Automation</span>
-        <span>API</span>
+        <span>Automation Testing</span>
+        <span>API Testing</span>
       </div>
     </aside>
   </div>
@@ -319,7 +321,7 @@
       <span class="panel-label">Core skills</span>
       <ul class="skills">
         <li>Manual Testing</li>
-        <li>Automation</li>
+        <li>Automation Testing</li>
         <li>API Testing</li>
         <li>JavaScript</li>
         <li>Python</li>
@@ -339,7 +341,7 @@
       <div class="work-list">
         <div class="work-item reveal">
           <div class="work-icon"><svg viewBox="0 0 24 24"><path d="M3 8h18v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8z"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg></div>
-          <div><h3>Quality Assurance Analyst</h3><p>Department of Science and Technology — Main Office. Manual, automation, and API testing on backend systems.</p></div>
+          <div><h3>Quality Assurance Analyst</h3><p>Department of Science and Technology — Main Office. Manual, Automation, and API testing on backend systems.</p></div>
         </div>
         <div class="work-item reveal">
           <div class="work-icon"><svg viewBox="0 0 24 24"><path d="M22 9 12 4 2 9l10 5 10-5z"/><path d="M6 11.5V17c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5.5"/></svg></div>
